@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+  <h2>Double tap and start writing</h2>
+  <canvas id="draw" width="500" height="680"></canvas>
+  <script>
+    const canvas = document.querySelector('#draw');
+    const ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth;
+    canvas.hight=window.innerHeight;
+    // ctx.strokeStyle="#BADA55";
+    ctx.lineJoin='round';
+    ctx.lineCap='round';
+    ctx.lineWidth=10;
+    let isdrawing=false;
+    lastx=0;
+    lasty=0;
+    let heu=0;
+    width=1;
+    function draw(e)
+    {
+      if (isdrawing)
+      {
+      console.log(e);
+      ctx.beginPath();
+      ctx.moveTo(lastx,lasty);
+      ctx.lineTo(e.offsetX,e.offsetY);
+      ctx.stroke();
+      
+      ctx.strokeStyle=`hsl(${heu},100%,50%)`;
+      lastx=e.offsetX;
+      lasty=e.offsetY;
+      heu++;
+      ctx.lineWidth=10;
+      if(heu>360)
+      {
+        heu=0;
+      }
+      }
+    }
+    canvas.addEventListener('mousemove',draw);
+    canvas.addEventListener('mousedown',(e) =>{
+       isdrawing=true,
+       lastx=e.offsetX;
+       lasty=e.offsetY;
+    });
+    canvas.addEventListener('mouseup',() => isdrawing=false);
+    canvas.addEventListener('mouseout',() => isdrawing=false);
+    
+    
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+    background:gray;
+  }
+  canvas{
+    border: 2px solid black;
+    background-color: aliceblue;
+  }
+</style>
+    
+</body>
+</html>
+<script>
+  function reverse(str){
+    console.log(str.slice(-1));
+    console.log(str.splice(2,1));
+  }
+</script>
